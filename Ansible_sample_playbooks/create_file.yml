@@ -1,0 +1,9 @@
+---
+- name: Creating files in nodes using playbook
+  hosts: all
+  become: true
+  tasks:
+    - name: creating file in nodes
+      file:
+        path: /home/ansible/demo.html
+        state: touch

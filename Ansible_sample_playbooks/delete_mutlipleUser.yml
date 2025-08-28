@@ -1,0 +1,24 @@
+---
+- name: deleting multiple users using playbook
+  hosts: all
+  become: true
+  tasks:
+    - name: delete users from nodes
+      user:
+        name: "{{ item }}"
+        state: absent
+      loop:
+        - sreya
+        - devi
+        - rupa
+        - pranay
+        - krishna
+
+    - name: delete users from nodes
+      ansible.builtin.user:
+        name: "{{item}}"
+        state: absent
+      
+      with_items:
+        - guddu
+        - richa

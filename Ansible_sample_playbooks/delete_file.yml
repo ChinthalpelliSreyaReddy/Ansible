@@ -1,0 +1,9 @@
+---
+- name: Deleting the file using playbbok
+  hosts: all
+  become: true
+  tasks:
+    - name: Deleting the file from nodes
+      file:
+        name: /home/ansible/demo.html
+        state: absent

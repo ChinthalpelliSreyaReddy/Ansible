@@ -1,0 +1,14 @@
+---
+- name: copying the files using playbbok
+  hosts: all
+  become: true
+  tasks:
+    - name: coyping the files to nodes
+      copy:
+        src: /home/ansible/{{ item }}
+        dest: /home/ansible
+
+      loop:
+        - demo.txt
+        - dummy.txt
+        - index.html

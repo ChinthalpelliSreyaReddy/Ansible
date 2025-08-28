@@ -1,0 +1,9 @@
+---
+- name: Creating folder using playbook
+  hosts: all
+  become: true
+  tasks:
+    - name: creating folder in nodes
+      file:
+        path: /home/ansible/sreya
+        state: directory

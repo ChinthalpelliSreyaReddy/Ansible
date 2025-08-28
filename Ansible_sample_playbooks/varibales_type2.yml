@@ -1,0 +1,15 @@
+---
+- name: using variables playbbok outside main playbbok
+  hosts: all
+  become: true
+  vars_files:
+    - variables_child.yml
+  tasks:
+    - name:
+      user:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - mummy
+        - daddy 
+

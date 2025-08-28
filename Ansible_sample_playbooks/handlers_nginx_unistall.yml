@@ -1,0 +1,16 @@
+---
+- name: uninstall nginx
+  hosts: all
+  become: true
+  tasks:
+    - name: stop the nginx service
+      service:
+        name: nginx
+        state: stopped
+      notify: remove nginx package
+  handlers:
+    - name: remove nginx package
+      yum:
+        name: nginx
+        state: absent
+

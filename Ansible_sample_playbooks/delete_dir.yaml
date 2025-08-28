@@ -1,0 +1,9 @@
+--- 
+- name: deleting the folder using playbbok
+  hosts: all
+  become: yes
+  tasks:
+    - name: deleting the folder in nodes
+      file:
+        path: /home/ansible/sreya
+        state: absent

@@ -1,0 +1,14 @@
+---
+- name: uninstalling httpd package using playbbok
+  hosts: all
+  become: true
+  tasks:
+    - name: uninstall httpd package in nodes
+      service:
+        name: httpd
+        state: stopped
+    - name: uninstall httpd package in nodes
+      yum:
+        name: httpd
+        state: absent
+

@@ -1,0 +1,29 @@
+---
+- name: By using handlers we can use notify command in playbbok
+  hosts: all
+  become: yes
+  tasks:
+    - name: installing nginx package
+      ansible.builtin.yum:
+        name: nginx
+        state: present
+      notify: start the nginx service
+
+    - name: starting  the nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: copying index file to the server
+      copy:
+        src: /home/ansible/index.html
+        dest: /usr/share/nginx/html/
+      notify: start the nginx service
+
+  handlers:
+    - name: start the nginx service
+      service:
+        name: nginx
+        status: restarted
+        enabled: yes

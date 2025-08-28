@@ -1,0 +1,42 @@
+---
+- name: Trying variables in playbook
+  hosts: all
+  become: yes
+  vars:
+    webservice_Debian: apache2
+    webservice_RedHat: httpd
+
+    webservice_service_start_Debian: apache2
+    webservice_service_start_RedHat: httpd
+
+    operating_system_Debian: Debian
+    operating_system_RedHat: RedHat
+
+  tasks:
+   - name: httpd installing {{operating_system_Debian}}
+     apt:
+       name: "{{webservice_Debian}}"
+       state: present
+     when: ansible_os_family == operating_system_Debian
+
+   - name: start the service {{operating_system_Debian}}
+     service:
+       name: "{{webservice_service_start_Debian}}"
+       state: started
+     when: ansible_os_family == operating_system_Debian
+
+   - name: httpd installing {{operating_system_RedHat}}
+     yum:
+       name: "{{webservice_RedHat}}"
+       state: present
+     when: ansible_os_family == operating_system_RedHat
+ 
+   - name: start the service {{operating_system_RedHat}}
+     service:
+       name: "{{webservice_service_start_RedHat}}"
+       state: started
+     when: ansible_os_family == operating_system_RedHat
+  handlers:
+   - name: restart the service
+     service:
+       name: "{{ operating_system_RedHat if ansible_os_family == 'RedHat' else operating_system_Debian }}"

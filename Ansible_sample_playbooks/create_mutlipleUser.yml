@@ -1,0 +1,23 @@
+---
+- name: creating multiple users using loop 
+  hosts: all
+  become: true
+  tasks:
+    - name: creating five users in nodes
+      user:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - sreya
+        - devi
+        - rupa
+        - pranay
+        - krishna
+
+    - name : creating users in nodes with other format
+      ansible.builtin.user:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - guddu
+        - richa

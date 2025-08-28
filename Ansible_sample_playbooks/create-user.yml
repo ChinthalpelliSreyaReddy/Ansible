@@ -1,0 +1,9 @@
+---
+- name: Creating user using playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: Creating user in nodes
+      user:
+        name: SreyaReddy
+        state: present
